@@ -2,6 +2,7 @@ name: "backend versioning"
 on:
   pull_request:
     branches: [main]
+    types: [closed]
   
 jobs:
   version_backend:
