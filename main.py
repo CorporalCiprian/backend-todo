@@ -7,7 +7,7 @@ from database import SessionLocal, engine, Base
 import os
 
 app = FastAPI(title="Todo API")
-
+#test
 ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "http://localhost:5173").split(",")
 app.add_middleware(
     CORSMiddleware,
