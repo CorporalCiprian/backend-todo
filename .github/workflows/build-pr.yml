@@ -9,7 +9,7 @@ jobs:
     uses: CorporalCiprian/todo-template/.github/workflows/build-template.yml@main
     with: 
       language: 'python'
-      version: '3.10'
+      version: '3.14'
 
    
 
