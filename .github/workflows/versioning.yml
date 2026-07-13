@@ -1,0 +1,14 @@
+name: "backend versioning"
+on:
+  pull_request:
+    branches: [main]
+    types: [closed]
+  
+jobs:
+  version_backend:
+    permissions:
+      contents: write
+    if: github.event.pull_request.merged == true
+    uses: CorporalCiprian/todo-template/.github/workflows/versioning-template.yml@main
+    with: 
+      branch: ${{ github.event.pull_request.head.ref }}
