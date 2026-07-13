@@ -7,9 +7,9 @@ on:
 jobs:
   build_python:
     uses: CorporalCiprian/todo-template/.github/workflows/build-template.yml@main
-      with: 
-        language: 'python'
-        version: '3.14'
+    with: 
+      language: 'python'
+      version: '3.14'
 
    
 
