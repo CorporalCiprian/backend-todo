@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: setup python
-      uses: CorporalCiprian/todo-template/.github/workflows/build-template.yml
+      uses: CorporalCiprian/todo-template/.github/workflows/build-template.yml@main
       with: 
         language: 'python'
         version: '3.14'
