@@ -6,7 +6,6 @@ on:
 
 jobs:
   deploy_to_test:
-    runs-on: ubuntu-latest
     uses: CorporalCiprian/todo-template/.github/workflows/deploy-template.yml@main
     with:
       env: Test
