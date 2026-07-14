@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     uses: CorporalCiprian/todo-template/.github/workflows/deploy-template.yml@main
     with:
-      env: test
+      env: Test
     
 
   
