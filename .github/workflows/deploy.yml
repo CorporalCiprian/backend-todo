@@ -5,26 +5,11 @@ on:
     branches: [main]
 
 jobs:
-  deploy:
+  deploy_to_test:
     runs-on: ubuntu-latest
-    environment:
-      name: test
-      deployment: false
-    steps:
-      - name: checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: get_pushed_tag
-        id: get_latest_tag
-        run: |
-          git fetch --tags
-          latest_tag=$(git tag -l --sort=-v:refname | head -n 1)
-          if [[ -z $latest_tag ]]; then
-            latest_tag='v0.0.0'
-          fi
-          echo "tag=$latest_tag" >> "$GITHUB_OUTPUT"
-      
-      - name: deploy
-        run: |
-          echo "Deploying to version: ${{steps.get_latest_tag.outputs.tag}}"
+    uses: CorporalCiprian/todo-template/.github/workflows/deploy-template.yml@main
+    with:
+      env: Test
+    
+
+  
