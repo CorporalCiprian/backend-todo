@@ -11,6 +11,10 @@ jobs:
       name: test
       deployment: false
     steps:
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: get_pushed_tag
         id: get_latest_tag
         run: |
