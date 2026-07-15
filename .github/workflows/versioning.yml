@@ -12,4 +12,4 @@ jobs:
     uses: CorporalCiprian/todo-template/.github/workflows/versioning-template.yml@main
     with: 
       branch: ${{ github.event.pull_request.head.ref }}
-      tk: ${{ secrets.TOKEN }}
+      tk: '${{ secrets.TOKEN }}'
