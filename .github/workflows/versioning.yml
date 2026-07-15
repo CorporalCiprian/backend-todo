@@ -10,6 +10,8 @@ jobs:
       contents: write
     if: github.event.pull_request.merged == true
     uses: CorporalCiprian/todo-template/.github/workflows/versioning-template.yml@main
+    env:
+      token: ${{secrets.TOKEN}}
     with: 
       branch: ${{ github.event.pull_request.head.ref }}
       token: ${{secrets.TOKEN}}
