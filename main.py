@@ -15,7 +15,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
+#test
 class TodoItem(Base):
     __tablename__ = "todos"
     id = Column(Integer, primary_key=True, index=True)
