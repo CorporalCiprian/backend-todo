@@ -5,7 +5,13 @@ on:
     branches: [main]
 
 jobs:
+  validate_branch:
+    uses: CorporalCiprian/todo-template/.github/workflows/check-branch-naming-convention.yml@main
+    with:
+      branch: ${{ github.event.pull_request.head.ref }}
+      
   build_python:
+    needs: validate_branch
     uses: CorporalCiprian/todo-template/.github/workflows/build-and-test-python.yml@main
     with: 
       version: '3.12'
