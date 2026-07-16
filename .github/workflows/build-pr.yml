@@ -3,6 +3,10 @@ name: Prepare and test Python
 on:
   pull_request:
     branches: [main]
+    paths:
+      - '*.py'
+      - 'requirements.txt'
+      - '*.db'
 
 jobs:
   build_python:
