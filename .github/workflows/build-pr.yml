@@ -6,7 +6,7 @@ on:
 
 jobs:
   build_python:
-    uses: CorporalCiprian/todo-template/.github/workflows/python/build-and-test.yml@main
+    uses: CorporalCiprian/todo-template/.github/workflows/build-and-test-python.yml@main
     with: 
       language: 'python'
       version: '3.12'
