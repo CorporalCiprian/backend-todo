@@ -5,6 +5,16 @@ from sqlalchemy import Column, Integer, String, Boolean
 from pydantic import BaseModel
 from database import SessionLocal, engine, Base
 import os
+from contextlib import asynccontextmanager
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Runs safely on application startup AFTER module import succeeds
+    try:
+        Base.metadata.create_all(bind=engine)
+    except Exception as e:
+        print(f"Database setup error: {e}")
+    yield
 
 app = FastAPI(title="Todo API")
 ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "http://localhost:5173").split(",")
@@ -21,8 +31,6 @@ class TodoItem(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String, index=True)
     completed = Column(Boolean, default=False)
-
-Base.metadata.create_all(bind=engine)
 
 class TodoCreate(BaseModel):
     title: str
