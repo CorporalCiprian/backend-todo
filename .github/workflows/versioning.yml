@@ -3,6 +3,11 @@ on:
   pull_request:
     branches: [main]
     types: [closed]
+    paths:
+      - 'database.py'
+      - 'main.py'
+      - 'requirements.txt'
+      - '.github/workflows/*'
   
 jobs:
   version_backend:
