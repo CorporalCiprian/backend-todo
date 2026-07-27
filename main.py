@@ -5,6 +5,7 @@ from sqlalchemy import Column, Integer, String, Boolean
 from pydantic import BaseModel
 from database import SessionLocal, engine, Base
 import os
+from contextlib import asynccontextmanager
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
