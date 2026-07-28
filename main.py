@@ -30,7 +30,15 @@ class TodoResponse(BaseModel):
     class Config:
         from_attributes = True
 
-Base.metadata.create_all(bind=engine)
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    try:
+        Base.metadata.create_all(bind=engine)
+        print("Tables created successfully!")
+    except Exception as e:
+        print(f"Database setup error: {e}")
+    yield
+
 app = FastAPI(title="Todo API")
 
 ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "http://localhost:5173").split(",")
