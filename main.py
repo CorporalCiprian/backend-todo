@@ -15,21 +15,6 @@ async def lifespan(app: FastAPI):
         print(f"Database setup error: {e}")
     yield
 
-models.Base.metadata.create_all(bind=engine)
-app = FastAPI(title="Todo API")
-from fastapi.responses import JSONResponse
-import traceback
-
-@app.exception_handler(Exception)
-async def global_exception_handler(request, exc):
-    return JSONResponse(
-        status_code=500,
-        content={
-            "error_type": type(exc).__name__,
-            "message": str(exc),
-            "traceback": traceback.format_exc().splitlines()
-        }
-    )
 ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "http://localhost:5173").split(",")
 app.add_middleware(
     CORSMiddleware,
@@ -60,6 +45,21 @@ class TodoResponse(BaseModel):
     class Config:
         from_attributes = True
 
+Base.metadata.create_all(bind=engine)
+app = FastAPI(title="Todo API")
+from fastapi.responses import JSONResponse
+import traceback
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request, exc):
+    return JSONResponse(
+        status_code=500,
+        content={
+            "error_type": type(exc).__name__,
+            "message": str(exc),
+            "traceback": traceback.format_exc().splitlines()
+        }
+    )
 def get_db():
     db = SessionLocal()
     try:
