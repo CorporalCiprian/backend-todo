@@ -6,23 +6,8 @@ from pydantic import BaseModel
 from database import SessionLocal, engine, Base
 import os
 from contextlib import asynccontextmanager
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    try:
-        Base.metadata.create_all(bind=engine)
-    except Exception as e:
-        print(f"Database setup error: {e}")
-    yield
-
-ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "http://localhost:5173").split(",")
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+from fastapi.responses import JSONResponse
+import traceback
 
 class TodoItem(Base):
     __tablename__ = "todos"
@@ -47,8 +32,17 @@ class TodoResponse(BaseModel):
 
 Base.metadata.create_all(bind=engine)
 app = FastAPI(title="Todo API")
-from fastapi.responses import JSONResponse
-import traceback
+
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "http://localhost:5173").split(",")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=ALLOWED_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request, exc):
