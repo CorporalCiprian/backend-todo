@@ -104,3 +104,40 @@ def delete_todo(todo_id: int, db: Session = Depends(get_db)):
 @app.get("/")
 def health_check():
     return {"status": "ok"}
+
+@app.get("/test-db")
+def test_database_connection():
+    import socket
+    import traceback
+    from sqlalchemy import create_engine
+    
+    host = "todo-pg-server-123.postgres.database.azure.com" 
+    port = 5432
+    
+    try:
+        s = socket.create_connection((host, port), timeout=3)
+        s.close()
+        network_status = "SUCCESS: Firewall is open and server is reachable."
+    except Exception as e:
+        return {"step": "Network Firewall Test", "error": str(e)}
+
+    try:
+        db_url = "postgresql://postgres:1q2w3e@todo-pg-server-123.postgres.database.azure.com:5432/todo_db?sslmode=require"
+        
+        engine = create_engine(db_url, connect_args={"connect_timeout": 5})
+        
+        with engine.connect() as connection:
+            return {
+                "step": "Database Login Test",
+                "network": network_status,
+                "status": "SUCCESS: We are logged into the database!"
+            }
+            
+    except Exception as e:
+        return {
+            "step": "Database Login Test",
+            "network": network_status,
+            "error_type": type(e).__name__,
+            "message": str(e),
+            "traceback": traceback.format_exc().splitlines()
+        }
