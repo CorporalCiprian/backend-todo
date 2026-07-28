@@ -9,7 +9,6 @@ from contextlib import asynccontextmanager
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Runs safely on application startup AFTER module import succeeds
     try:
         Base.metadata.create_all(bind=engine)
     except Exception as e:
@@ -17,6 +16,19 @@ async def lifespan(app: FastAPI):
     yield
 
 app = FastAPI(title="Todo API")
+from fastapi.responses import JSONResponse
+import traceback
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request, exc):
+    return JSONResponse(
+        status_code=500,
+        content={
+            "error_type": type(exc).__name__,
+            "message": str(exc),
+            "traceback": traceback.format_exc().splitlines()
+        }
+    )
 ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "http://localhost:5173").split(",")
 app.add_middleware(
     CORSMiddleware,
