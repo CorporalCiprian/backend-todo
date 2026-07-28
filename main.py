@@ -15,6 +15,7 @@ async def lifespan(app: FastAPI):
         print(f"Database setup error: {e}")
     yield
 
+models.Base.metadata.create_all(bind=engine)
 app = FastAPI(title="Todo API")
 from fastapi.responses import JSONResponse
 import traceback
