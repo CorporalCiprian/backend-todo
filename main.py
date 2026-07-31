@@ -113,7 +113,7 @@ def test_database_connection():
     import traceback
     from sqlalchemy import create_engine
     
-    host = "todo-pg-server-123.postgres.database.azure.com" 
+    host = "todo-pg-server-dev.postgres.database.azure.com" 
     port = 5432
     
     try:
