@@ -7,7 +7,7 @@ jobs:
   deploy_to_test:
     uses: CorporalCiprian/todo-template/.github/workflows/deploy-app-python.yml@main
     with:
-      env: Test
+      env: dev
       deploy: true
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
