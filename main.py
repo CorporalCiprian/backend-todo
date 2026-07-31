@@ -124,7 +124,7 @@ def test_database_connection():
         return {"step": "Network Firewall Test", "error": str(e)}
 
     try:
-        db_url = "postgresql://postgres:1q2w3e@todo-pg-server-123.postgres.database.azure.com:5432/todo_db?sslmode=require"
+        db_url = "postgresql://postgres:1q2w3e@todo-pg-server-dev.postgres.database.azure.com:5432/todo-db-dev"
         
         engine = create_engine(db_url, connect_args={"connect_timeout": 5})
         
