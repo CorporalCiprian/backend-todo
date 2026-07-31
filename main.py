@@ -39,7 +39,7 @@ async def lifespan(app: FastAPI):
         print(f"Database setup error: {e}")
     yield
 
-app = FastAPI(title="Todo API")
+app = FastAPI(title="Todo API", lifespan=lifespan)
 
 ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "http://localhost:5173").split(",")
 app.add_middleware(
