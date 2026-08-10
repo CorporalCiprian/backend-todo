@@ -8,6 +8,7 @@ import os
 from contextlib import asynccontextmanager
 from fastapi.responses import JSONResponse
 import traceback
+import logging
 
 class TodoItem(Base):
     __tablename__ = "todos"
@@ -34,9 +35,9 @@ class TodoResponse(BaseModel):
 async def lifespan(app: FastAPI):
     try:
         Base.metadata.create_all(bind=engine)
-        print("Tables created successfully!")
+        logging.info("Tables created successfully!")
     except Exception as e:
-        print(f"Database setup error: {e}")
+        logging.error(f"Database setup error: {e}")
     yield
 
 app = FastAPI(title="Todo API", lifespan=lifespan)
