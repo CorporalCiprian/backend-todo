@@ -3,3 +3,9 @@ __pycache__/
 .env
 .git/
 *.pyc
+.gitignore
+tests/
+.github/
+README.md
+test.db
+local-settings.json

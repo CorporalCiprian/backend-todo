@@ -1,13 +1,19 @@
-FROM python:3.12
+FROM python:3.14 AS builder
+
+COPY requirements.txt .
+
+RUN pip install --user -r requirements.txt
+
+FROM python:3.14-slim
 
 WORKDIR /app
 
-COPY ./requirements.txt /app/requirements.txt
+ENV PATH=/root/.local/bin:$PATH
 
-RUN pip install -r /app/requirements.txt
+COPY --from=builder /root/.local /root/.local
+
+COPY ./zip /app
 
 EXPOSE 8000
 
-COPY ./zip /app/zip
-
-CMD ["fastapi", "run", "zip/main.py", "--port", "8000"]
+CMD ["fastapi", "run", "main.py", "--port", "8000"]
