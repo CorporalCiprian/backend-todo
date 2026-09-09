@@ -2,7 +2,8 @@ on:
   push:
     tags:
       - 'v*'
-
+permissions:
+  contents: write
 jobs:
   deploy_to_test:
     uses: CorporalCiprian/todo-template/.github/workflows/deploy-app-python.yml@main
