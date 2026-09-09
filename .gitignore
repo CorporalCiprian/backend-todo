@@ -3,3 +3,8 @@ __pycache__/
 .env
 venv/
 local-settings.json
+src/
+.python-version
+pyproject.toml
+uv.lock
+.venv
