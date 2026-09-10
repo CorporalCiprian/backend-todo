@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   deploy_to_test:
-    uses: CorporalCiprian/todo-template/.github/workflows/deploy-app-python.yml@main
+    uses: CorporalCiprian/todo-template/.github/workflows/deploy-container-app-python.yml@main
     with:
       env: dev
     secrets:
