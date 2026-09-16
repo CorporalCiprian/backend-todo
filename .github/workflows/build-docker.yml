@@ -17,7 +17,6 @@ jobs:
   build_docker:
     uses: CorporalCiprian/todo-template/.github/workflows/docker-build.yml@main
     with:
-      env: dev
       AZURE_CONTAINER_REGISTRY: crtododev
       tag: ${{ inputs.tag }}
     secrets:
