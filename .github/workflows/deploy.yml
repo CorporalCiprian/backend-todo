@@ -7,12 +7,6 @@ on:
       AZURE_CONTAINER_REGISTRY:
         required: true
         type: string
-      AZURE_REGISTRY_USERNAME:
-        required: true
-        type: string
-      AZURE_REGISTRY_PASSWORD:
-        required: true
-        type: string
 permissions:
   id-token: write
   contents: read
