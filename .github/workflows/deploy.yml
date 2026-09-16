@@ -4,9 +4,10 @@ on:
       - 'v*'
   workflow_dispatch:
     inputs:
-      AZURE_CONTAINER_REGISTRY:
-        required: true
+      tag:
+        required: false
         type: string
+        default: null
 permissions:
   id-token: write
   contents: read
@@ -19,5 +20,7 @@ jobs:
     secrets:
       AZURE_REGISTRY_USERNAME: ${{ secrets.AZURE_REGISTRY_USERNAME }}
       AZURE_REGISTRY_PASSWORD: ${{ secrets.AZURE_REGISTRY_PASSWORD }}
+      AZURE_CONTAINER_REGISTRY: crtododev
+      tag: ${{ inputs.tag }}
 
   
