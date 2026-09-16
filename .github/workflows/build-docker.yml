@@ -1,3 +1,4 @@
+name: Docker Build
 on:
   push:
     tags:
@@ -13,7 +14,7 @@ permissions:
   contents: read
 
 jobs:
-  deploy_to_test:
+  build_docker:
     uses: CorporalCiprian/todo-template/.github/workflows/docker-build.yml@main
     with:
       env: dev
