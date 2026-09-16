@@ -1,0 +1,32 @@
+on:
+  workflow_run:
+    workflows: ['Docker Build']
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      tag:
+        required: false
+        type: string
+        default: null
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy_to_test:
+    uses: CorporalCiprian/todo-template/.github/workflows/docker-deploy.yml@main
+    with:
+      env: dev
+      AZURE_CONTAINER_REGISTRY: crtododev
+      CONTAINER_APP_NAME: ca-backend-todo-dev
+      RESOURCE_GROUP: rg-containers-todo-dev
+      CONTAINER_APP_ENVIRONMENT: cae-todo-dev
+      tag: ${{ inputs.tag }}
+    secrets:
+      AZURE_REGISTRY_USERNAME: ${{ secrets.AZURE_REGISTRY_USERNAME }}
+      AZURE_REGISTRY_PASSWORD: ${{ secrets.AZURE_REGISTRY_PASSWORD }}
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID}}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+
+  
