@@ -14,4 +14,4 @@ COPY --from=builder /root/.local /root/.local
 
 COPY ./zip /app
 
-CMD ["fastapi", "run", "main.py", "--port", "8000"]
+CMD ["fastapi", "run", "main.py", "--port", "80"]
