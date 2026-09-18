@@ -22,7 +22,7 @@ class TodoCreate(BaseModel):
 class TodoUpdate(BaseModel):
     title: str
     completed: bool
-
+#test
 class TodoResponse(BaseModel):
     id: int
     title: str
