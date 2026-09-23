@@ -22,7 +22,7 @@ jobs:
       RESOURCE_GROUP: rg-containers-todo-dev
       CONTAINER_APP_ENVIRONMENT: cae-todo-dev
       tag: ${{ inputs.tag }}
-      targetPort: 80
+      targetPort: 8001
     secrets:
       AZURE_REGISTRY_USERNAME: ${{ secrets.AZURE_REGISTRY_USERNAME }}
       AZURE_REGISTRY_PASSWORD: ${{ secrets.AZURE_REGISTRY_PASSWORD }}
