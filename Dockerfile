@@ -14,6 +14,6 @@ COPY --from=builder /root/.local /root/.local
 
 COPY ./zip /app
 
-EXPOSE 8000
+EXPOSE 8001
 
-CMD ["fastapi", "run", "main.py", "--port", "8000"]
+CMD ["fastapi", "run", "main.py", "--port", "8001"]
